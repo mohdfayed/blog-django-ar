@@ -1,3 +1,4 @@
+Copied from ReadMe.txt
 > md Blogger
 > cd Blogger
 > git init
