@@ -105,7 +105,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 # If you want static folder to serve all project's apps
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-    'E:\_B\MF_BLOG\Blogger\src\static',  # path of ststic folder
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),
+#     'E:\_B\MF_BLOG\Blogger\src\static',  # path of ststic folder
+# ]

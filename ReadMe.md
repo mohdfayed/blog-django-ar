@@ -57,6 +57,25 @@ Copied from ReadMe.txt
 			os.path.join(BASE_DIR, "static"),
 			'E:\_B\MF_BLOG\Blogger\src\static', # path of static folders
 			]
+STATIC FILES:
+A: Static files serves all apps in the project:
+*	Create the template folders
+*	Create home function in blog/views.py
+*	Create blog/urls.py, fill it,
+*	Update scr/urls.py
+*	Create blog/templates/blog/index.html
+*	Create static/CSS/main.css
+*	Run the project.
+A: Static files serves only blog app:
+*	Move static folder to blog app (blog/static)
+*	Create static/blog/ and move folders (css, js, fonts and images) to it.
+*	COMMENT the STATICFOLDER_DIRS at bottom of settings.py
+*	change reference of main.css in index file to read:
+	<link rel="stylesheet" href="{% static 'blog/CSS/main.css' %}">
+	instead of:
+	<link rel="stylesheet" href="{% static 'CSS/main.css' %}">
+*	Run the project.... it is ok.. Yesssss
+
 
 (Blogger) e:\_B\MD_BLOG\Blogger\src > 
 (Blogger) e:\_B\MD_BLOG\Blogger\src > 

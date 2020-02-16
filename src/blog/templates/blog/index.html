@@ -4,14 +4,21 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'CSS/main.css' %}">
-    <title>My_Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'blog/CSS/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/CSS/main.css' %}">
+    <link rel="shortcut icon" href="{% static 'blog/images/favicon.ico' %}">
+    <!-- <script src="https://kit.fontawesome.com/ab12fa52a1.js" crossorigin="anonymous"></script> -->
+    <title>My_Blog (مدونة خاصة)</title>
 </head>
 
 <body>
-    <div>Hello !</div>
-    <h3>My Blog index.html</h3>
+    <div><i class="fas fa-home"></i> Hello !</div>
+    <h3>أهلا ومرحبا بكم فى المدونة</h3>
+    <script src="{% static 'blog/JS/jquery-3.4.1.slim.min.js' %}"></script>
+    <script src="{% static 'blog/JS/popper.min.js' %}"></script>
+    <script src="{% static 'blog/JS/bootstrap.min.js' %}"></script>
+    <script src="{% static 'blog/JS/fontawesome-all.min.js' %}"></script>
 </body>
 
 </html>
