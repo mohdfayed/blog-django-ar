@@ -1,94 +1,31 @@
+{% extends 'blog/base.html' %}
+
+<!-- to be removed when using the user image -->
 {% load static %}
-<!DOCTYPE html>
-<html lang="ar">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <link rel="stylesheet" href="{% static 'blog/CSS/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'blog/CSS/main.css' %}">
-    <link rel="shortcut icon" href="{% static 'blog/images/favicon.ico' %}">
-    <!-- <script src="https://kit.fontawesome.com/ab12fa52a1.js" crossorigin="anonymous"></script> -->
-    <title>My_Blog (مدونة خاصة)</title>
-</head>
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{message.tags}}">
+    {{message}}
+</div>
+{% endfor %}
+{% endif %}
+{% for post in posts %}
+<div class="border p-3 mb-3">
+    <img class="img-fluid rounded-circle border m-2" style="width: 70px; height:70px;"
+        src="{% static 'blog\images\avatar.png' %}" alt="صورة الناشر">
+    <span class="text-secondary">نشر في {{post.post_date|date:'d-m-Y'}}</span>
+    <h3><a class="text-dark" href="{% url 'detail' post.id %}">{{post.title}}</a></h3>
+    <p>{{post.content}}</p>
+</div>
+{% empty %}
+<div class="border p-3 mb-3">
+    <h3>لا يوجد تدوينات، إذا كان لديك حساب مسجل من قبل يمكنك <a href="#">تسجيل الدخول</a> والقيام بنشر
+        أول تدوينة في الموقع.</h3>
+</div>
+{% endfor %}
 
-<body>
-    <header>
-        <!-- Start Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="{% url 'home' %}">
-                <img src="{% static 'blog/images/mim-logo.png' %}" width="30px" alt="شعار مدونة">
-                مدونة</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+{% include 'blog/pagination.html' with page=posts %}
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">الرئيسية <span class="sr-only">(current)</span></a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            دوراتى
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">دورة بايثون</a>
-                            <a class="dropdown-item" href="#">دورة دجانجو</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">موضوعات أخرى</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">من أنا</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">تسجيل دخول</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">تسجيل</a></li>
-                </ul>
-            </div>
-        </nav>
-        <!-- End Navbar -->
-    </header>
-    <section>
-        <div class="container">
-            <div class="row mt-4">
-                <div class="col-md-8">التدوينات</div>
-                <div class="col-md-4">
-                    <div class="card mb-3">
-                        <h3 class="text-center bg-secondary text-light p-2">آخر 5 تدوينات</h3>
-                        <ul>
-                            <li><a href="#">التدوينة الأولى</a></li>
-                            <li><a href="#">التدوينة الثانية</a></li>
-                            <li><a href="#">التدوينة الثالثة</a></li>
-                            <li><a href="#">التدوينة الرابعة</a></li>
-                            <li><a href="#">التدوينة الخامسة</a></li>
-                        </ul>
-                    </div>
-                    <div class="card mb-3">
-                        <h3 class="text-center bg-secondary text-light p-2">آخر 5 تعليقات</h3>
-                        <ul>
-                            <li><a href="#">التعليق الأول</a></li>
-                            <li><a href="#">التعليق الثانى</a></li>
-                            <li><a href="#">التعليق الثالث</a></li>
-                            <li><a href="#">التعليق الرابع</a></li>
-                            <li><a href="#">التعليق الخامس</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <hr>
-    <div><i class="fas fa-home"></i> أهلا ومرحبا بكم فى المدونة !</div>
-    <script src="{% static 'blog/JS/jquery-3.4.1.slim.min.js' %}"></script>
-    <script src="{% static 'blog/JS/popper.min.js' %}"></script>
-    <script src="{% static 'blog/JS/bootstrap.min.js' %}"></script>
-    <script src="{% static 'blog/JS/fontawesome-all.min.js' %}"></script>
-</body>
-
-</html>
+{% endblock content %}

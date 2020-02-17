@@ -1,3 +1,8 @@
+NEW: 
+*	Vodeo 08: The font does not show as the tutorial font ?
+*	ORM Videos 14, 15
+
+
 Copied from ReadMe.txt
 > md Blogger
 > cd Blogger
