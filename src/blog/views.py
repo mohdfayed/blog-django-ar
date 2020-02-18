@@ -55,15 +55,15 @@ def post_detail(request, post_id):
     comments = post.comments.filter(active=True)
 
     # check before save data from comment form
-    # if request.method == 'POST':
-    # comment_form = NewComment(data=request.POST)
-    # if comment_form.is_valid():
-    # new_comment = comment_form.save(commit=False)
-    # new_comment.post = post
-    # new_comment.save()
-    comment_form = NewComment()
-    # else:
-    # comment_form = NewComment()
+    if request.method == 'POST':
+        comment_form = NewComment(data=request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.post = post
+            new_comment.save()
+            comment_form = NewComment()
+    else:
+        comment_form = NewComment()
 
     context = {
         'title': post,
