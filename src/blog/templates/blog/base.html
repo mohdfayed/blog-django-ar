@@ -1,4 +1,6 @@
 {% load static %}
+{% load post_tag %}
+
 <!DOCTYPE html>
 <html lang="ar">
 
@@ -73,27 +75,11 @@
                     <br><br>
                     <div class="card mb-3">
                         <h3 class="text-center bg-secondary text-light p-2">آخر التدوينات</h3>
-                        {% include 'blog/latest_posts.html' %}
-                        <!-- <ul>
-                            <li><a href="#">التدوينة الأولى</a></li>
-                            <li><a href="#">التدوينة الثانية</a></li>
-                            <li><a href="#">التدوينة الثالثة</a></li>
-                            <li><a href="#">التدوينة الرابعة</a></li>
-                            <li><a href="#">التدوينة الخامسة</a></li>
-                        </ul> -->
+                        {% latest_posts %}
                     </div>
                     <div class="card mb-3">
-                        <!-- <h3 class="text-center bg-secondary text-light p-2">آخر 5 تعليقات</h3> -->
-                        <!-- <h3 class="text-center bg-secondary text-light p-2">آخر التعليقات</h3> -->
                         <h3 class="text-center bg-secondary text-light p-2">آخر التعليقات</h3>
-                        <!-- latest_comments -->
-                        <!-- <ul>
-                            <li><a href="#">التعليق الأول</a></li>
-                            <li><a href="#">التعليق الثانى</a></li>
-                            <li><a href="#">التعليق الثالث</a></li>
-                            <li><a href="#">التعليق الرابع</a></li>
-                            <li><a href="#">التعليق الخامس</a></li>
-                        </ul> -->
+                        {% latest_comments %}
                     </div>
                 </div>
             </div>
