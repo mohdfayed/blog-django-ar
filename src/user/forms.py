@@ -1,12 +1,12 @@
 from django import forms
 from django.contrib.auth.models import User
-# from .models import Profile
+from .models import Profile
 
 
 class UserCreationForm(forms.ModelForm):
     username = forms.CharField(label='اسم المستخدم', max_length=30,
-                               help_text='اسم المستخدم يجب ألا يحتوي على مسافات.')
-    email = forms.EmailField(label='البريد الإلكتروني')
+                               help_text='اسم المستخدم يجب ألا يحتوى على مسافات.')
+    email = forms.EmailField(label='البريد الإلكترونى')
     first_name = forms.CharField(label='الاسم الأول')
     last_name = forms.CharField(label='الاسم الأخير')
     password1 = forms.CharField(
@@ -45,14 +45,15 @@ class LoginForm(forms.ModelForm):
 class UserUpdateForm(forms.ModelForm):
     first_name = forms.CharField(label='الاسم الأول')
     last_name = forms.CharField(label='الاسم الأخير')
-    email = forms.EmailField(label='البريد الإلكتروني')
+    email = forms.EmailField(label='البريد الإلكترونى')
 
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'email')
 
 
-# class ProfileUpdateForm(forms.ModelForm):
-#     class Meta:
-#         model = Profile
-#         fields = ('image',)
+class ProfileUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        fields = ('image',)

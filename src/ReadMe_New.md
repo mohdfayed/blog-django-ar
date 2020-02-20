@@ -1,0 +1,3 @@
+I made modifications on images handling. and saved that version with suffix (-34_MF)
+Then will continue from minute 3:00 in video 34 to use Signals.......
+

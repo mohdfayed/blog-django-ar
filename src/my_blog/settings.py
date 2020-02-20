@@ -113,3 +113,8 @@ STATIC_URL = '/static/'
 #     os.path.join(BASE_DIR, "static"),
 #     'E:\_B\MF_BLOG\Blogger\src\static',  # path of ststic folder
 # ]
+LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = 'login'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

@@ -2,45 +2,29 @@
 
 from django.shortcuts import render, get_object_or_404
 from .models import Post, Comment
-from .forms import NewComment  # , PostCreateForm
+from .forms import NewComment, PostCreateForm
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-# from django.views.generic import CreateView, UpdateView, DeleteView
-# from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
-
-# posts = [
-#     {
-#         'title': 'التدوينة الأولى',
-#         'content': 'نص التدوينة الأولى كنص تجريبى',
-#         'post_date': '15-3-2019',
-#         'author': 'أحمد أبوعيسى'
-#     },
-#     {
-#         'title': 'التدوينة الثانية',
-#         'content': 'نص التدوينة كنص تجريبى',
-#         'post_date': '19-4-2019',
-#         'author': 'أحمد أبوعيسى المحترم'
-#     },
-#     {
-#         'title': 'التدوينة الثالة',
-#         'content': 'نص التدوينة كنص تجريبى',
-#         'post_date': '20-3-2018',
-#         'author': 'أبوعيسى أحمد'
-#     },
-#     {
-#         'title': 'التدوينة الرابعة',
-#         'content': 'نص التدوينة كنص تجريبى',
-#         'post_date': '29-5-2019',
-#         'author': 'أحمد السيد أبوعيسى'
-#     }
-# ]
+# video 38, use class based views to create new blog
+from django.views.generic import CreateView, UpdateView, DeleteView
+# use these for protectin class Based View
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
 def home(request):
+    posts = Post.objects.all()
+    paginator = Paginator(posts, 5)
+    page = request.GET.get('page')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_page)
     context = {
         'title': 'الصفحة الرئيسية',
-        # 'posts': posts
-        'posts': Post.objects.all()
+        'posts': posts,
+        'page': page,
     }
     return render(request, 'blog/index.html', context)
 
@@ -73,3 +57,51 @@ def post_detail(request, post_id):
     }
 
     return render(request, 'blog/detail.html', context)
+
+# video 38, use class based views to create new blog ===============================================
+# Use LoginRequiredMixin this way with class Based View
+
+
+class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Post
+    # fields = ['title', 'content']
+    template_name = 'blog/post_new.html'
+    form_class = PostCreateForm
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
+class PostUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
+    model = Post
+    template_name = 'blog/post_update.html'
+    form_class = PostCreateForm
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    # to be used by UserPassesTestMixin to verify user is the post.author
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        else:
+            return False
+
+
+class PostDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
+    model = Post
+    # DeleteView let it look for this file by default
+    # template_name = 'blog/post_confirm_delte.html'
+
+    # by default after delete DeleteView looks for this direction
+    success_url = '/'
+
+    # to be used by UserPassesTestMixin to verify user is the post.author
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False

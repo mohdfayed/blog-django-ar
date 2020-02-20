@@ -1,0 +1,7 @@
+Scripts/*
+include/*
+Lib/*
+tcl/*
+*.pyc
+.directory
+

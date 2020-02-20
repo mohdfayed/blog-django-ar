@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     {% if title %}
-    <title>مدونة | {{title}}</title>
+    <title>مدونة | {{title}} | {{user.username}}</title>
     {% else %}
     <title>مدونة</title>
     {% endif %}
@@ -53,10 +53,24 @@
                         <a class="nav-link" href="{% url 'about' %}">من أنا</a>
                     </li>
                 </ul>
+
+                {% if user.is_authenticated %}
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">تسجيل دخول</a></li>
+                    {% if user.is_superuser %}
+                    <li class="nav-item"><a class="nav-link" href="/admin">مدير الموقع</a></li>
+                    {% endif %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'post_new' %}">تدوينة جديدة</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">الملف الشخصى</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">خروج</a></li>
+                </ul>
+                {% else %}
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">دخول</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">تسجيل</a></li>
                 </ul>
+                {% endif %}
+
+
             </div>
         </nav>
         <!-- End Navbar -->
@@ -96,11 +110,10 @@
                             <h3 class="card-titel text-center border-bottom p-2 m-3">من أنا</h3>
                             <div class="card-body">
                                 <div class="text-center">
-                                    <img src="{% static 'blog/images/mim-logo.png' %}" alt="شعار مدونة" width="100px">
+                                    <img src="{% static 'blog/images/mim-logo.png' %}" width="30px" alt="شعار مدونة">
                                 </div>
                                 من أنا نص تجريبى من أنا نص تجريبى من أنا نص تجريبى من أنا نص تجريبى من أنا نص تجريبى من
-                                أنا نص تجريبى من أنا نص تجريبى من أنا نص تجريبى من أنا نص تجريبى من أنا نص تجريبى من أنا
-                                نص تجريبى من أنا نص تجريبى من أنا نص تجريبى من أنا نص تجريبى
+                                أنا نص تجريبى من أنا نص تجريبى من أنا نص تجريبى من أنا نص تجريبى من أنا نص تجريبى
                             </div>
                         </div>
                         <div class="card m-3">

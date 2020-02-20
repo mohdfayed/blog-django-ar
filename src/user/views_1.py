@@ -71,12 +71,12 @@ def profile(request):
     except EmptyPage:
         post_list = paginator.page(paginator.num_page)
     # Mine Start
-    # print(request.user)
-    # print(request.user.id)
-    # idx = request.user.id
-    # image_x = Profile.objects.get(pk=idx)
-    # image_x = image_x.image.url
-    # print(image_x)
+    print(request.user)
+    print(request.user.id)
+    idx = request.user.id
+    image_x = Profile.objects.get(pk=idx)
+    image_x = image_x.image.url
+    print(image_x)
     # End Mine
     # print(post_list)
     return render(request, 'user/profile.html',
@@ -85,27 +85,31 @@ def profile(request):
                       'posts': posts,
                       'post_list': post_list,
                       'page': page,
-                      #   'image_x': image_x,
+                      'image_x': image_x,
                   })
 
 
 @login_required(login_url='login')
 def profile_update(request):
-    if request.method == 'POST':
-        user_form = UserUpdateForm(request.POST, instance=request.user)
-        profile_form = ProfileUpdateForm(
-            request.POST, request.FILES, instance=request.user.profile)
-        if user_form.is_valid and profile_form.is_valid:
-            user_form.save()
-            profile_form.save()
-            messages.success(request, 'تم تحديث الملف الشخصى.')
-            return redirect('profile')
-    else:
-        user_form = UserUpdateForm(instance=request.user)
-        profile_form = ProfileUpdateForm(instance=request.user.profile)
+    user_form = UserUpdateForm()
+    profile_form = ProfileUpdateForm()
+
+    #     if request.method == 'POST':
+    #         user_form = UserUpdateForm(request.POST, instance=request.user)
+    #         profile_form = ProfileUpdateForm(
+    #             request.POST, request.FILES, instance=request.user.profile)
+    #         if user_form.is_valid and profile_form.is_valid:
+    #             user_form.save()
+    #             profile_form.save()
+    #             messages.success(
+    #                 request, 'تم تحديث الملف الشخصي.')
+    #             return redirect('profile')
+    #     else:
+    #         user_form = UserUpdateForm(instance=request.user)
+    #         profile_form = ProfileUpdateForm(instance=request.user.profile)
 
     context = {
-        'title': 'تعديل الملف الشخصى',
+        'title': 'تعديل الملف الشخصي',
         'user_form': user_form,
         'profile_form': profile_form,
     }

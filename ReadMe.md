@@ -1,8 +1,27 @@
+github:
+from blogger folder
+
+git status
+git add .
+git commit -m " Comment"
+git remote -v
+git push -u origin master
+==================================================
 NEW: 
-*	Vodeo 08: The font does not show as the tutorial font ?
+*	Vodeo 08: The font does not show as the tutorial font ? Sunnedly showen !!!
 *	ORM Videos 14, 15
+*	Important:
+		In video 28 he will use different way to login & logout.
+		I kept a copy of tthe project named: Blogger_27.zip before this change
+		1. In \user\forms.py create new class [LoginForm(forms.ModelForm):]
+		2. Import it to \user\views.py and define finction [def login_user(request):]
+		In video 29 will create the login & logout in HTML. a copy of this is kept in: Blogger_28_corrected.zip 
+		Video 29, renamed login to login_crispy, second one to login_Form 
+		To use html only in log in, only remove reference to the form from views.py, marked so in code
 
 
+
+=============================================================
 Copied from ReadMe.txt
 > md Blogger
 > cd Blogger
@@ -88,8 +107,3 @@ A: Static files serves only blog app:
 
 (Blogger) e:\_B\MD_BLOG\Blogger >
 (Blogger) e:\_B\MD_BLOG\Blogger > 
-
-
-
-
-
